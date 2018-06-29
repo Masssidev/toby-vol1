@@ -4,6 +4,7 @@
 
 스프링의 의존 라이브러리는 스프링의 업데이트마다 새롭게 추가되거나 버전이 바뀔 수 있다. 최신 의존 라이브러리 정보는 스프링 배포판이나 Maven 리포지토리의 POM 정보를 참고.
 <hr/>
+
 ### 의존 라이브러리의 종류와 특징
 #### 의존 라이브러리 이름
 의존 라이브러리는 스프링 개발팀이 만든 것이 아니므로 모듈의 이름에 일정한 패턴이 있지는 않다. 하지만 스프링 소스가 OSGi 호환 모듈로 재패키징한 모듈의 이름은 일정한 패턴이 있다.
@@ -36,7 +37,9 @@ OSGi의 명명 규칙을 따라 모듈의 기본 패키지 이름을 모듈 이�
 
 스프링 소스 엔터프라이즈 번들 리포지토리의 검색 기능(http://ebr.springsource.com/repository/app/)을 이용해 라이브러리를 찾으면 된다.
 
-각 라이브러리의 의존정보는 해당 라이브러리의 문서나 POM 정보를 참고. 수동 추가의 경우는 이렇게 추가적으로 필요한 의존 라이브러리를 일일이 찾아서 넣어줘야 하는 번거로움이 있다.
+※ 각 라이브러리의 의존정보는 해당 라이브러리의 문서나 POM 정보를 참고.
+
+> 수동 추가의 경우는 이렇게 추가적으로 필요한 의존 라이브러리를 일일이 찾아서 넣어줘야 하는 번거로움이 있다.
 ##### 자동 추가
 Maven이나 Ivy를 이용하는 경우에는 Maven의 디폴트 리포지토리인 Maven Central에서 Maven 스타일의 이름을 가진 파일을 가져오는 방법과 스프링소스가 제공하는 Maven 리포지토리에서 OSGi 호환 파일을 가져오는 방법이 있다.
 
@@ -58,4 +61,16 @@ Commons Logging이라면 다음과 같은 ```<dependency>``` 태그를 pom.xml�
   <usl>http://repository.springsource.com/maven/bundles/external</url>
 </repository>
 ```
-스프링소스 Maven 리포지토리에 등록된 Commons Logging은 다음과 같은 설정을 통해 가져올 수 있다. 
+스프링소스 Maven 리포지토리에 등록된 Commons Logging은 다음과 같은 설정을 통해 가져올 수 있다. 각 라이브러리의 Maven 설정정보는 검색(http://ebr.springsource.com/repository/app/) 결과에서 찾을 수 있다.
+```
+<dependency>
+  <groupId>org.apache.commons</groupId>
+  <artifactId>com.springsource.org.apache.commons.logging</artifactId>
+  <version>1.1.1</version>
+</dependency>
+```
+가능하면 의존 라이브러리의 리포지토리는 하나로 통일하는 게 좋다. 하지만 스프링 소스의 OSGi 호환 라이브러리 리포지토리는 Maven Central보다 최신 버전의 업데이트가 느린 편이다. 따라서 스프링소스 리포지토리의 라이브러리를 사용하더라도 일부 라이브러리는 Maven Central 리포지토리에서 가져와야 할 수도 있다.
+
+※ Ivy의 리포지토리 설정은 스프링소스 리포지토리의 FAQ(http://ebr.springsource.com/repository/app/faq)를 참고.
+
+> 자동 의존 라이브러리 관리 기능을 사용할 경우 라이브러리의 의존정보를 참고해서 추가적인 의존 라이브러리도 포함해준다. 하지만 의존정보가 항상 완벽하진 않고, 프로젝트마다 선택적으로 추가하거나 제외시켜야 할 것도 있으므로 어떤 라이브러리가 자동으로 추가되는지 직접 확인해볼 필요가 있다.
